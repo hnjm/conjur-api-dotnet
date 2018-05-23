@@ -32,10 +32,10 @@ namespace Conjur
         /// <param name="client">Conjur client to query.</param>
         /// <param name="query">Query for search.</param>
         /// <returns>Returns IEnumerable to User.</returns>
-        internal static IEnumerable<User> List(Client client, string query = null)
+        internal static IEnumerable<User> List(Client client, string query = null, string actingAs = null)
         {
             Func<ResourceMetadata, User> newInst = (searchRes) => new User(client, searchRes.Id);
-            return ListResources<User, ResourceMetadata>(client, "user", newInst, query);
+            return ListResources<User, ResourceMetadata>(client, "user", newInst, query, actingAs);
         }
     }
 }

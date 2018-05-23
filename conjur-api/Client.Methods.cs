@@ -30,22 +30,24 @@ namespace Conjur
         /// Search for variables
         /// </summary>
         /// <param name="query">Query for search.</param>
+        /// <param name="actingAs">Fully qualified role name. For example MyCompanyName:group:security_admin. Note support for this value is limited in the current version of this library.</param>
         /// <returns>List of variables matching the query.</returns>
         /// Note enumerating can incur network requests to fetch more data.
-        public IEnumerable<Variable> ListVariables(string query = null)
+        public IEnumerable<Variable> ListVariables(string query = null, string actingAs = null)
         {
-            return Conjur.Variable.List(this, query);
+            return Conjur.Variable.List(this, query, actingAs);
         }
 
         /// <summary>
         /// Search for users
         /// </summary>
         /// <param name="query">Query for search.</param>
+        /// <param name="actingAs">Fully qualified role name. For example MyCompanyName:group:security_admin. Note support for this value is limited in the current version of this library.</param>
         /// <returns>List of users matching the query.</returns>
         /// Note enumerating can incur network requests to fetch more data.
-        public IEnumerable<User> ListUsers(string query = null)
+        public IEnumerable<User> ListUsers(string query = null, string actingAs = null)
         {
-            return Conjur.User.List(this, query);
+            return Conjur.User.List(this, query, actingAs);
         }
 
         /// <summary>

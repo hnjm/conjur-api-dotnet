@@ -35,13 +35,6 @@ namespace Conjur
         }
 
         /// <summary>
-        /// Switch the client to ActingAs another role. Set to null by default.
-        /// </summary>
-        /// Note support for this value is limited in the current version of this library.
-        /// <value>Fully qualified role name. For example MyCompanyName:group:security_admin.</value>
-        public string ActingAs { get; set; }
-
-        /// <summary>
         /// Gets the appliance URI.
         /// </summary>
         /// <value>The appliance URI.</value>

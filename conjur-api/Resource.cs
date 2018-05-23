@@ -50,8 +50,9 @@ namespace Conjur
         /// <param name="client">Conjur client to query.</param>
         /// <param name="kind">Resource kind to query.</param>
         /// <param name="query">Query for search.</param>
+        /// <param name="actingAs">Fully qualified role name. For example MyCompanyName:group:security_admin.</param>
         /// <returns>Returns IEnumerable<T>.</returns>
-        internal static IEnumerable<T> ListResources<T, TResult>(Client client, string kind, Func<TResult, T> newT, string query = null) 
+        internal static IEnumerable<T> ListResources<T, TResult>(Client client, string kind, Func<TResult, T> newT, string query = null, string actingAs = null) 
         {
             uint offset = 0;
             List<TResult> resultList;
@@ -60,7 +61,7 @@ namespace Conjur
                 string urlWithParams = $"authz/{client.GetAccountName()}/resources/{kind}?offset={offset}"
                                       + $"&limit={LIMIT_SEARCH_VAR_LIST_RETURNED}"
                                       + ((query != null) ? $"&search={query}" : string.Empty)
-                                      + ((client.ActingAs != null) ? $"&acting_as={client.ActingAs}" : string.Empty);
+                                      + ((actingAs != null) ? $"&acting_as={actingAs}" : string.Empty);
 
                 resultList = JsonSerializer<List<TResult>>.Read(client.AuthenticatedRequest(urlWithParams));
                 foreach (TResult searchVarResult in resultList)
